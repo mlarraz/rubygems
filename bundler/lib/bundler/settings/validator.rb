@@ -83,14 +83,8 @@ module Bundler
 
         path = path.expand_path
 
-        root = begin
-                 Bundler.root
-               rescue GemfileNotFound
-                 Pathname.pwd
-               end
-
         path = begin
-                 path.relative_path_from(root)
+                 path.relative_path_from(Bundler.app_config_root)
                rescue ArgumentError
                  path
                end

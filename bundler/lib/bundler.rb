@@ -282,6 +282,10 @@ module Bundler
       @root ||= resolve_root
     end
 
+    def app_config_root
+      @app_config_root ||= resolve_config_root
+    end
+
     def app_config_path
       if app_config = ENV["BUNDLE_APP_CONFIG"]
         app_config_pathname = Pathname.new(app_config)
@@ -691,10 +695,6 @@ EOF
       yield
     ensure
       ENV.replace(backup)
-    end
-
-    def app_config_root
-      @app_config_root ||= resolve_config_root
     end
 
     def resolve_config_root(base = Pathname.pwd)
